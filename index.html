@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#eeeae2">
+  <meta name="description" content="FRAME 35 — индивидуальные фотосессии на 35-мм плёнку в Санкт-Петербурге. Портреты, город, честные моменты.">
+  <title>FRAME 35 — плёночная фотография в Петербурге</title>
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <style>
+    /* 01. Базовые стили и палитра */
+    :root { --cream:#eeeae2; --paper:#f8f6f1; --ink:#252522; --muted:#4f4f49; --line:#c8c2b8; --brown:#8c715b; --red:#a63d32; --serif:Georgia,'Times New Roman',serif; --sans:Arial,Helvetica,sans-serif; }
+    *,*::before,*::after {box-sizing:border-box}
+    html {scroll-behavior:smooth;scroll-padding-top:85px}
+    body {margin:0;color:var(--ink);background:var(--cream);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+    body.menu-open {overflow:hidden}
+    img {display:block;max-width:100%}
+    a {color:inherit;text-decoration:none}
+    button {font:inherit}
+    button,a {-webkit-tap-highlight-color:transparent}
+    :focus-visible {outline:2px solid var(--red);outline-offset:5px}
+    ::selection {background:var(--red);color:white}
+    .wrap {width:min(100% - 88px,1400px);margin-inline:auto}
+    .eyebrow {font-size:13px;letter-spacing:.2em;text-transform:uppercase;font-weight:700}
+    .display {font-family:var(--serif);font-weight:400;letter-spacing:-.055em;line-height:.98}
+    .section-head {display:flex;align-items:end;justify-content:space-between;gap:25px;margin-bottom:42px}
+    .section-title {font:400 clamp(54px,8vw,122px)/.95 var(--serif);letter-spacing:-.062em;margin:10px 0 0}
+    .arrow {display:inline-block;transition:transform .25s ease}
+    a:hover .arrow,button:hover .arrow {transform:translate(4px,-4px)}
+    .btn {min-height:54px;display:inline-flex;align-items:center;justify-content:center;gap:36px;padding:15px 23px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);font-size:12px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .25s,color .25s,border-color .25s,transform .25s}
+    .btn:hover {background:var(--red);border-color:var(--red);transform:translateY(-2px)}
+    .btn-outline {background:transparent;color:var(--ink)}
+    .btn-outline:hover {color:white}
+    .muted {color:var(--muted)}
+
+    /* 02. Шапка и мобильная навигация */
+    .header {position:sticky;top:0;z-index:50;background:rgba(238,234,226,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(14px)}
+    .header-inner {min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand {display:flex;align-items:center;gap:13px;flex-shrink:0}
+    .brand-mark {width:34px;height:34px;border:2px solid var(--ink);display:grid;place-items:center;font-size:12px;font-weight:800;letter-spacing:-.08em;transform:rotate(-5deg)}
+    .brand-name {font-size:21px;letter-spacing:-.075em;font-weight:800}
+    .nav {display:flex;align-items:center;gap:clamp(18px,2.7vw,42px)}
+    .nav a {font-size:12px;letter-spacing:.12em;text-transform:uppercase;transition:color .25s}
+    .nav a:hover {color:var(--red)}
+    .nav .nav-accent {color:var(--red)}
+    .menu-toggle {display:none;position:relative;width:42px;height:42px;background:none;border:1px solid var(--ink);cursor:pointer;z-index:52}
+    .menu-toggle span {position:absolute;left:10px;right:10px;height:1px;background:var(--ink);transition:transform .25s,top .25s}
+    .menu-toggle span:first-child {top:16px}.menu-toggle span:last-child {top:24px}
+    .menu-open .menu-toggle span:first-child {top:20px;transform:rotate(45deg)}
+    .menu-open .menu-toggle span:last-child {top:20px;transform:rotate(-45deg)}
+
+    /* 03. Первый экран */
+    .hero {position:relative;min-height:min(810px,calc(100svh - 82px));background:#423a33;color:#fff;overflow:hidden;display:flex;align-items:end}
+    .hero-image,.hero-shade {position:absolute;inset:0;width:100%;height:100%}
+    .hero-image {object-fit:cover;object-position:center 48%;filter:grayscale(55%) sepia(22%) brightness(.75)}
+    .hero-shade {background:linear-gradient(90deg,rgba(18,17,16,.55),rgba(18,17,16,.08) 85%),linear-gradient(0deg,rgba(18,17,16,.6),transparent 65%)}
+    .hero-content {position:relative;z-index:1;padding-block:120px 64px}
+    .hero-topline {display:flex;align-items:center;gap:14px;margin-bottom:35px}
+    .red-dot {width:8px;height:8px;background:#d45f4b;border-radius:100%}
+    .hero h1 {font-size:clamp(78px,15.2vw,245px);margin:0 0 22px;max-width:1250px;line-height:.79;letter-spacing:-.075em}
+    .hero h1 span {font-style:italic;font-weight:400}
+    .hero-bottom {display:flex;align-items:end;justify-content:space-between;gap:40px;margin-top:55px}
+    .hero-copy {max-width:435px;font-size:clamp(15px,1.4vw,19px);line-height:1.65}
+    .hero-index {font-size:12px;letter-spacing:.13em;text-align:right;text-transform:uppercase;line-height:1.8}
+    .hero .btn {background:var(--paper);color:var(--ink);border-color:var(--paper)}
+    .hero .btn:hover {background:var(--red);color:white;border-color:var(--red)}
+
+    /* 04. О студии */
+    .about {padding:140px 0 150px}
+    .about-grid {display:grid;grid-template-columns:.85fr 1.15fr;gap:8vw}
+    .about-side {display:flex;flex-direction:column;justify-content:space-between;align-items:start}
+    .about-stamp {border:1px solid var(--brown);color:var(--brown);padding:17px;border-radius:100%;width:118px;height:118px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:10px;line-height:1.5;letter-spacing:.12em;text-transform:uppercase;transform:rotate(-12deg)}
+    .about-statement {font:400 clamp(34px,4.7vw,72px)/1.12 var(--serif);letter-spacing:-.045em;margin:0}
+    .about-statement em {color:var(--brown);font-style:italic}
+    .about-text {display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:50px;padding-top:28px;border-top:1px solid var(--line);font-size:14px;line-height:1.8;color:var(--muted)}
+
+    /* 05. Галерея: редакционная асимметричная сетка */
+    .portfolio {padding:100px 0 120px;background:var(--paper)}
+    .portfolio-meta {font-size:12px;letter-spacing:.08em;color:var(--muted);margin-bottom:6px}
+    .gallery {display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:18px}
+    .shot {margin:0;position:relative;overflow:hidden;background:#d5cabe}
+    .shot:nth-child(1) {grid-column:span 7;aspect-ratio:1.25}
+    .shot:nth-child(2) {grid-column:span 5;aspect-ratio:.9}
+    .shot:nth-child(3) {grid-column:span 4;aspect-ratio:.82}
+    .shot:nth-child(4) {grid-column:span 4;aspect-ratio:.82}
+    .shot:nth-child(5) {grid-column:span 4;aspect-ratio:.82}
+    .shot:nth-child(6) {grid-column:span 12;aspect-ratio:2.25}
+    .shot img {width:100%;height:100%;object-fit:cover;filter:grayscale(42%) sepia(16%) contrast(.94);transition:transform .7s cubic-bezier(.2,.7,.2,1),filter .6s}
+    .shot:hover img {transform:scale(1.045);filter:grayscale(5%) sepia(12%)}
+    .shot figcaption {position:absolute;left:18px;bottom:17px;color:white;font-size:12px;letter-spacing:.16em;text-transform:uppercase;text-shadow:0 1px 9px #0009}
+    .gallery-note {margin-top:20px;display:flex;justify-content:space-between;gap:20px;font-size:12px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted)}
+
+    /* 06. Услуги и цены */
+    .services {padding:130px 0 145px}
+    .service-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+    .service-card {display:flex;flex-direction:column;min-height:420px;padding:30px;background:transparent;border:1px solid var(--line);transition:background .3s,transform .3s,border-color .3s}
+    .service-card:hover {background:var(--paper);transform:translateY(-6px);border-color:var(--brown)}
+    .service-top {display:flex;justify-content:space-between;align-items:start;font-size:12px;letter-spacing:.13em;text-transform:uppercase}
+    .service-card h3 {margin:83px 0 15px;font:400 clamp(35px,3.2vw,53px)/1.05 var(--serif);letter-spacing:-.05em}
+    .service-card p {font-size:14px;color:var(--muted);line-height:1.75;max-width:310px;margin:0 0 28px}
+    .service-bottom {display:flex;align-items:end;justify-content:space-between;gap:12px;margin-top:auto;border-top:1px solid var(--line);padding-top:24px}
+    .price {font:400 31px/1 var(--serif);letter-spacing:-.05em}
+    .service-link {font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--red);padding-block:10px}
+    .price-note {margin-top:24px;font-size:12px;line-height:1.7;color:var(--muted)}
+
+    /* 07. Преимущества */
+    .benefits {padding:110px 0 125px;background:#2b2a27;color:var(--paper)}
+    .benefits .section-head {border-bottom:1px solid #62605a;padding-bottom:50px}
+    .benefits .muted {color:#b7b1aa}
+    .benefit-grid {display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+    .benefit {padding-top:15px}
+    .benefit-num {color:#c48e7e;font:italic 35px var(--serif)}
+    .benefit h3 {margin:40px 0 15px;font:400 clamp(25px,2.6vw,39px)/1.1 var(--serif)}
+    .benefit p {color:#bfbab2;max-width:350px;font-size:14px;line-height:1.8}
+
+    /* 08. Контакты и подвал */
+    .contact {padding:140px 0 150px;text-align:center}
+    .contact .eyebrow {color:var(--red)}
+    .contact h2 {font:400 clamp(64px,12vw,186px)/.9 var(--serif);letter-spacing:-.07em;margin:29px auto}
+    .contact h2 em {font-weight:400;color:var(--brown)}
+    .contact p {max-width:470px;margin:0 auto 37px;color:var(--muted);font-size:16px;line-height:1.75}
+    .contact-actions {display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+    .contact-sub {margin-top:55px;font-size:12px;text-transform:uppercase;letter-spacing:.16em}
+    .footer {background:var(--ink);color:var(--paper);padding:40px 0 28px}
+    .footer-top {display:flex;justify-content:space-between;gap:30px;align-items:start;padding-bottom:65px}
+    .footer-logo {font-size:clamp(60px,10vw,145px);font-weight:800;letter-spacing:-.095em;line-height:.8}
+    .footer-links {display:flex;flex-wrap:wrap;gap:20px}
+    .footer-links a {font-size:12px;text-transform:uppercase;letter-spacing:.09em;color:#d0cac1;transition:color .2s}
+    .footer-links a:hover {color:white}
+    .footer-bottom {display:flex;justify-content:space-between;gap:16px;border-top:1px solid #55534d;padding-top:20px;color:#aaa69f;font-size:12px;text-transform:uppercase;letter-spacing:.1em}
+
+    /* 08b. Форма заявки и уведомление */
+    .request-form {max-width:780px;margin:46px auto 0;background:var(--paper);border:1px solid var(--line);padding:34px;text-align:left}
+    .form-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px}
+    .form-field {display:flex;flex-direction:column;gap:8px;min-width:0}
+    .form-field.form-full {grid-column:1 / -1}
+    .form-field label {font-size:12px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+    .form-field label .req {color:var(--red)}
+    .form-field input,.form-field select {min-height:52px;padding:13px 15px;background:var(--cream);border:1px solid var(--line);color:var(--ink);font:15px var(--sans);border-radius:0;transition:border-color .25s,background .25s}
+    .form-field input:focus,.form-field select:focus {outline:none;border-color:var(--brown);background:#fdfbf7}
+    .form-field input::placeholder {color:#a39c90}
+    .form-field.invalid input,.form-field.invalid select {border-color:var(--red);background:#f8ece8}
+    .form-error {display:none;color:var(--red);font-size:12px;line-height:1.5;letter-spacing:.02em}
+    .form-field.invalid .form-error {display:block}
+    .request-submit {width:100%;margin-top:26px}
+    .request-submit:disabled {opacity:.55;cursor:default;pointer-events:none}
+    .form-note {margin:18px 0 0;font-size:12px;line-height:1.7;color:var(--muted)}
+    .toast {position:fixed;left:50%;bottom:30px;transform:translate(-50%,16px);z-index:70;display:flex;align-items:center;gap:13px;background:var(--ink);border:1px solid #55534d;color:var(--paper);padding:16px 26px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;box-shadow:0 14px 34px #0003;opacity:0;visibility:hidden;transition:opacity .3s,transform .3s,visibility .3s}
+    .toast.show {opacity:1;visibility:visible;transform:translate(-50%,0)}
+    .toast .toast-dot {width:8px;height:8px;background:var(--red);border-radius:100%;flex-shrink:0}
+
+    /* 09. Адаптивная вёрстка */
+    @media(max-width:1000px) {
+      .wrap {width:min(100% - 50px,1400px)}
+      .about-grid {gap:40px}
+      .about {padding:105px 0}
+      .services,.benefits,.portfolio,.contact {padding-block:95px}
+      .service-card {padding:23px;min-height:410px}
+      .service-card h3 {margin-top:75px}
+    }
+    @media(max-width:760px) {
+      html {scroll-padding-top:70px}
+      .header-inner {min-height:70px}
+      .menu-toggle {display:block}
+      .nav {position:fixed;inset:70px 0 auto 0;background:var(--cream);padding:28px 25px 34px;display:flex;flex-direction:column;align-items:stretch;gap:0;border-bottom:1px solid var(--line);visibility:hidden;opacity:0;transform:translateY(-12px);pointer-events:none;transition:opacity .25s,transform .25s,visibility .25s;box-shadow:0 14px 25px #0001}
+      .menu-open .nav {visibility:visible;opacity:1;transform:none;pointer-events:auto}
+      .nav a {font-size:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+      .hero {min-height:700px;min-height:calc(92svh - 70px)}
+      .hero-content {padding-block:110px 40px}
+      .hero h1 {font-size:clamp(69px,16vw,124px)}
+      .hero-bottom {align-items:start;flex-direction:column;gap:26px;margin-top:38px}
+      .hero-index {display:none}
+      .about-grid {grid-template-columns:1fr;gap:45px}
+      .about-side {flex-direction:row;align-items:start;gap:20px}
+      .about-stamp {width:86px;height:86px;flex-shrink:0;font-size:8px}
+      .about-statement {font-size:clamp(36px,7vw,60px)}
+      .service-grid,.benefit-grid {grid-template-columns:1fr}
+      .service-card {min-height:325px}
+      .service-card h3 {margin-top:48px}
+      .benefits .section-head {padding-bottom:30px}
+      .benefit {border-top:1px solid #62605a;padding-top:20px}
+      .benefit h3 {margin-top:23px}
+      .footer-top {flex-direction:column;gap:43px;padding-bottom:45px}
+    }
+    @media(max-width:520px) {
+      .wrap {width:calc(100% - 36px)}
+      .brand-name {font-size:19px}
+      .hero {min-height:640px}
+      .hero h1 {font-size:clamp(61px,17.5vw,96px)}
+      .hero-copy {font-size:15px}
+      .hero-topline {font-size:12px}
+      .section-title {font-size:clamp(54px,15vw,76px)}
+      .section-head {align-items:start;flex-direction:column;gap:14px;margin-bottom:28px}
+      .about,.services,.benefits,.portfolio,.contact {padding-block:75px}
+      .about-side {align-items:center}
+      .about-text {grid-template-columns:1fr;gap:4px;margin-top:30px}
+      .gallery {gap:9px}
+      .shot:nth-child(1),.shot:nth-child(2),.shot:nth-child(3),.shot:nth-child(4) {grid-column:span 6;aspect-ratio:.78}
+      .shot:nth-child(5),.shot:nth-child(6) {grid-column:span 12;aspect-ratio:1.3}
+      .shot figcaption {font-size:12px;left:10px;bottom:10px}
+      .gallery-note {font-size:12px;line-height:1.6}
+      .contact h2 {font-size:clamp(61px,14vw,100px)}
+      .contact-actions {flex-direction:column;align-items:stretch}
+      .footer-logo {font-size:clamp(60px,17vw,100px)}
+      .footer-bottom {flex-direction:column}
+    }
+    @media(prefers-reduced-motion:reduce) {html {scroll-behavior:auto}*,*::before,*::after {animation-duration:.01ms!important;transition-duration:.01ms!important}}
+  </style>
+</head>
+<body>
+  <!-- Шапка -->
+  <header class="header" id="top">
+    <div class="wrap header-inner">
+      <a href="#top" class="brand" aria-label="FRAME 35 — на главную"><span class="brand-mark" aria-hidden="true">35</span><span class="brand-name">FRAME 35<span style="color:var(--red)">.</span></span></a>
+      <nav class="nav" id="site-nav" aria-label="Основная навигация">
+        <a href="#about">О проекте</a><a href="#portfolio">Портфолио</a><a href="#services">Услуги</a><a href="#benefits">Почему плёнка</a><a href="#contacts" class="nav-accent">Контакты ↗</a>
+      </nav>
+      <button class="menu-toggle" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="site-nav"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Первый экран -->
+    <section class="hero" aria-labelledby="hero-title">
+      <img class="hero-image" src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=2200&q=85" alt="Атмосферный городской портрет в мягком естественном свете" fetchpriority="high">
+      <div class="hero-shade" aria-hidden="true"></div>
+      <div class="wrap hero-content">
+        <div class="hero-topline eyebrow"><span class="red-dot"></span> Независимая фотостудия · Санкт-Петербург</div>
+        <h1 class="display" id="hero-title">ЖИЗНЬ<br>В <span>35</span> КАДРАХ.</h1>
+        <div class="hero-bottom">
+          <div><p class="hero-copy">Неидеальные. Настоящие. Твои.<br>Портреты и истории Петербурга на 35-мм плёнку.</p><a class="btn" href="#contacts">Записаться на съёмку <span class="arrow" aria-hidden="true">↗</span></a></div>
+          <div class="hero-index">Independent photo journal<br>Issue № 001 / 2026<br>Scroll to explore ↓</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Философия -->
+    <section class="about" id="about" aria-labelledby="about-title">
+      <div class="wrap about-grid">
+        <div class="about-side"><div><span class="eyebrow">01 / Манифест</span><h2 class="section-title" id="about-title">Не просто<br><i>фото.</i></h2></div><div class="about-stamp">Made with<br>feeling<br>35 mm film</div></div>
+        <div><p class="about-statement">В мире бесконечных дублей мы выбираем <em>один настоящий момент.</em></p><div class="about-text"><p>FRAME 35 — авторский проект о людях, свете и случайностях. Мы снимаем на настоящую 35-миллиметровую фотоплёнку, гуляем по любимым улицам и не просим тебя быть кем-то другим.</p><p>Здесь не нужно уметь позировать. Достаточно быть собой. Остальное сделают город, зерно плёнки и немного магии ожидания.</p></div></div>
+      </div>
+    </section>
+
+    <!-- Портфолио -->
+    <section class="portfolio" id="portfolio" aria-labelledby="portfolio-title">
+      <div class="wrap"><div class="section-head"><div><span class="eyebrow">02 / Selected frames</span><h2 class="section-title" id="portfolio-title">Моменты<span style="color:var(--red)">.</span></h2></div><div class="portfolio-meta">Чувства вместо фильтров / 001—006</div></div>
+        <div class="gallery">
+          <!-- Демонстрационные кадры: замените на авторские фотографии перед публикацией -->
+          <figure class="shot"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=85" alt="Крупный женский портрет с мягким боковым светом" loading="lazy"><figcaption>01 / Portrait study</figcaption></figure>
+          <figure class="shot"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=85" alt="Женский портрет на нейтральном фоне" loading="lazy"><figcaption>02 / Light & shadow</figcaption></figure>
+          <figure class="shot"><img src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=750&q=85" alt="Тёплый солнечный свет над природным пейзажем" loading="lazy"><figcaption>03 / Golden hour</figcaption></figure>
+          <figure class="shot"><img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=750&q=85" alt="Мягкий свет и фактура природного пейзажа" loading="lazy"><figcaption>04 / Quiet places</figcaption></figure>
+          <figure class="shot"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=750&q=85" alt="Выразительный мужской портрет" loading="lazy"><figcaption>05 / Human stories</figcaption></figure>
+          <figure class="shot"><img src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1500&q=85" alt="Городской вечер с атмосферным небом" loading="lazy"><figcaption>06 / After dark</figcaption></figure>
+        </div>
+        <div class="gallery-note"><span>Снято с чувством. Без спешки.</span><span>35 mm / Saint Petersburg</span></div>
+      </div>
+    </section>
+
+    <!-- Услуги; цены демонстрационные, их можно отредактировать -->
+    <section class="services" id="services" aria-labelledby="services-title"><div class="wrap"><div class="section-head"><div><span class="eyebrow">03 / Your story</span><h2 class="section-title" id="services-title">Форматы<span style="color:var(--red)">.</span></h2></div><p class="muted" style="font-size:13px;max-width:220px;line-height:1.7">Каждая съёмка — маленькая история, которую хочется сохранить.</p></div>
+      <div class="service-grid">
+        <article class="service-card"><div class="service-top"><span>№ 01 / Portrait</span><span>↗</span></div><h3>Один<br>на один</h3><p>Личный плёночный портрет без поз и ожиданий. Прогулка или уютная локация, выбранная вместе.</p><div class="service-bottom"><strong class="price">4 500 ₽</strong><a class="service-link" href="#contacts" aria-label="Записаться на портретную съёмку">Выбрать <span class="arrow">↗</span></a></div></article>
+        <article class="service-card"><div class="service-top"><span>№ 02 / City walk</span><span>↗</span></div><h3>Город<br>и ты</h3><p>Уличная история среди дворов, парадных и набережных Петербурга. Движение, воздух, случайные кадры.</p><div class="service-bottom"><strong class="price">5 500 ₽</strong><a class="service-link" href="#contacts" aria-label="Записаться на городскую фотосессию">Выбрать <span class="arrow">↗</span></a></div></article>
+        <article class="service-card"><div class="service-top"><span>№ 03 / Two souls</span><span>↗</span></div><h3>История<br>двоих</h3><p>Для пары или двух близких людей. Нежность, смех, прикосновения — всё то, что невозможно повторить.</p><div class="service-bottom"><strong class="price">6 500 ₽</strong><a class="service-link" href="#contacts" aria-label="Записаться на парную фотосессию">Выбрать <span class="arrow">↗</span></a></div></article>
+      </div><p class="price-note">* Цены и состав пакетов приведены как пример оформления. Уточните актуальную стоимость, количество кадров, проявку и сканирование перед публикацией сайта.</p>
+    </div></section>
+
+    <!-- Преимущества аналоговой фотографии -->
+    <section class="benefits" id="benefits" aria-labelledby="benefits-title"><div class="wrap"><div class="section-head"><div><span class="eyebrow">04 / Why analog</span><h2 class="section-title" id="benefits-title">Магия<br><i>несовершенства.</i></h2></div><span class="eyebrow muted">Less perfection / More feeling</span></div><div class="benefit-grid"><article class="benefit"><span class="benefit-num">01.</span><h3>Ничего лишнего</h3><p>Ограниченное число кадров помогает быть внимательнее к моменту, а не к количеству дублей.</p></article><article class="benefit"><span class="benefit-num">02.</span><h3>Живая фактура</h3><p>Зерно, мягкие оттенки и естественный свет создают изображение с характером — без цифровой стерильности.</p></article><article class="benefit"><span class="benefit-num">03.</span><h3>Искусство ждать</h3><p>Ты не видишь результат сразу. И именно поэтому встреча с готовыми кадрами становится особенной.</p></article></div></div></section>
+
+    <!-- Контакты: не используется вымышленный адрес студии. Нативное письмо без адресата -->
+    <section class="contact" id="contacts" aria-labelledby="contacts-title"><div class="wrap"><span class="eyebrow">05 / Get in touch</span><h2 id="contacts-title">Твоя история<br><em>следующая?</em></h2><p>Расскажи о своей идее, любимых местах или просто напиши «хочу на плёнку». Начнём с разговора.</p><div class="contact-actions"><a class="btn" href="mailto:?subject=FRAME%2035%20%E2%80%94%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D1%8C%20%D0%BD%D0%B0%20%D1%81%D1%8A%D1%91%D0%BC%D0%BA%D1%83&body=%D0%9F%D1%80%D0%B8%D0%B2%D0%B5%D1%82%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%BD%D0%B0%20%D0%BF%D0%BB%D1%91%D0%BD%D0%BE%D1%87%D0%BD%D1%83%D1%8E%20%D1%81%D1%8A%D1%91%D0%BC%D0%BA%D1%83.%0A%D0%A4%D0%BE%D1%80%D0%BC%D0%B0%D1%82%3A%20%0A%D0%94%D0%B0%D1%82%D0%B0%3A%20" aria-label="Создать письмо о записи на съёмку">Подготовить письмо <span class="arrow" aria-hidden="true">↗</span></a></div>
+      <form class="request-form" id="request-form" novalidate>
+        <div class="form-grid">
+          <div class="form-field form-full">
+            <label for="req-name">Имя <span class="req">*</span></label>
+            <input type="text" id="req-name" name="name" placeholder="Как к вам обращаться" autocomplete="name" required>
+            <span class="form-error">Пожалуйста, укажите ваше имя</span>
+          </div>
+          <div class="form-field">
+            <label for="req-format">Формат фотосессии <span class="req">*</span></label>
+            <select id="req-format" name="format" required>
+              <option value="" selected>Выберите формат</option>
+              <option value="Один на один — портрет (4 500 ₽)">Один на один — портрет (4 500 ₽)</option>
+              <option value="Город и ты — City walk (5 500 ₽)">Город и ты — City walk (5 500 ₽)</option>
+              <option value="История двоих — парная (6 500 ₽)">История двоих — парная (6 500 ₽)</option>
+              <option value="Другой формат — обсудим">Другой формат — обсудим</option>
+            </select>
+            <span class="form-error">Выберите формат съёмки</span>
+          </div>
+          <div class="form-field">
+            <label for="req-date">Желаемая дата съёмки <span class="req">*</span></label>
+            <input type="date" id="req-date" name="date" required>
+            <span class="form-error">Укажите желаемую дату</span>
+          </div>
+          <div class="form-field form-full">
+            <label for="req-contact">Контакт для обратной связи <span class="req">*</span></label>
+            <input type="text" id="req-contact" name="contact" placeholder="Телефон, Telegram или email" autocomplete="off" required>
+            <span class="form-error">Оставьте контакт, чтобы мы могли ответить</span>
+          </div>
+        </div>
+        <button class="btn request-submit" type="submit" id="copy-request">Скопировать заявку <span aria-hidden="true">⧉</span></button>
+        <p class="form-note">Данные не отправляются на сервер: текст заявки формируется из заполненных полей и копируется в буфер обмена.</p>
+      </form><div class="contact-sub">Санкт-Петербург · Снимаем там, где живут истории</div><p class="muted" style="font-size:12px;margin:15px auto 0">Добавьте реальный email или ссылку на соцсеть студии перед запуском: письмо пока открывается без адресата.</p></div></section>
+  </main>
+
+  <!-- Подвал -->
+  <footer class="footer"><div class="wrap"><div class="footer-top"><a class="footer-logo" href="#top" aria-label="Вернуться наверх">FRAME 35.</a><nav class="footer-links" aria-label="Навигация в подвале"><a href="#about">О проекте</a><a href="#portfolio">Портфолио</a><a href="#services">Услуги</a><a href="#benefits">Плёнка</a><a href="#contacts">Контакты</a></nav></div><div class="footer-bottom"><span>© <span id="year">2026</span> FRAME 35. Все права защищены.</span><span>Made slowly · Saint Petersburg</span><a href="#top">Наверх ↑</a></div></div></footer>
+
+  <!-- Уведомление об успешном копировании заявки -->
+  <div class="toast" id="request-toast" role="status" aria-live="polite"><span class="toast-dot" aria-hidden="true"></span>Заявка скопирована</div>
+
+  <script>
+    // Мобильное меню: открытие, закрытие при выборе раздела и по Escape.
+    const menuButton = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('.nav');
+    function closeMenu() { document.body.classList.remove('menu-open'); menuButton.setAttribute('aria-expanded','false'); menuButton.setAttribute('aria-label','Открыть меню'); }
+    menuButton.addEventListener('click', () => { const open = document.body.classList.toggle('menu-open'); menuButton.setAttribute('aria-expanded',String(open)); menuButton.setAttribute('aria-label',open?'Закрыть меню':'Открыть меню'); });
+    nav.querySelectorAll('a').forEach(link => link.addEventListener('click',closeMenu));
+    document.addEventListener('keydown',event => { if(event.key === 'Escape') closeMenu(); });
+    window.addEventListener('resize',() => { if(window.innerWidth > 760) closeMenu(); });
+
+    // Форма заявки: валидация полей, формирование текста и копирование в буфер обмена.
+    const requestForm = document.getElementById('request-form');
+    const toast = document.getElementById('request-toast');
+    const dateInput = requestForm.elements.date;
+    dateInput.min = new Date().toISOString().split('T')[0]; // запрет прошедших дат
+
+    // Сообщение об ошибке для каждого поля.
+    const fieldError = (name) => requestForm.elements[name].closest('.form-field');
+    function setInvalid(fieldName, hasError) { fieldError(fieldName).classList.toggle('invalid', hasError); }
+
+    // Базовая проверка обязательных полей.
+    function validateRequestForm() {
+      let valid = true;
+      [['name','Пожалуйста, укажите ваше имя'],
+       ['format','Выберите формат съёмки'],
+       ['date','Укажите желаемую дату'],
+       ['contact','Оставьте контакт, чтобы мы могли ответить']].forEach(([name]) => {
+        const value = requestForm.elements[name].value.trim();
+        setInvalid(name, value === '');
+        if (value === '') valid = false;
+      });
+      if (!valid) { const first = requestForm.querySelector('.form-field.invalid'); if (first) first.querySelector('input,select').focus(); }
+      return valid;
+    }
+
+    // Читаемая дата: ГГГГ-ММ-ДД → ДД.ММ.ГГГГ.
+    function formatRequestDate(value) {
+      const [y, m, d] = value.split('-');
+      return `${d}.${m}.${y}`;
+    }
+
+    // Собираем текст заявки из введённых данных.
+    function buildRequestText() {
+      const f = requestForm.elements;
+      return ['Заявка на фотосессию FRAME 35',
+        '----------------------------',
+        `Имя: ${f.name.value.trim()}`,
+        `Формат: ${f.format.value}`,
+        `Желаемая дата: ${formatRequestDate(f.date.value)}`,
+        `Контакт для связи: ${f.contact.value.trim()}`].join('\n');
+    }
+
+    // Показ уведомления «Заявка скопирована».
+    function showRequestToast() {
+      toast.classList.add('show');
+      clearTimeout(showRequestToast._timer);
+      showRequestToast._timer = setTimeout(() => toast.classList.remove('show'), 2600);
+    }
+
+    // Копирование с фолбэком для небезопасных контекстов.
+    async function copyToClipboard(text) {
+      if (navigator.clipboard && window.isSecureContext) { await navigator.clipboard.writeText(text); return; }
+      const helper = document.createElement('textarea');
+      helper.value = text; helper.style.position = 'fixed'; helper.style.opacity = '0';
+      document.body.appendChild(helper); helper.select();
+      const ok = document.execCommand('copy'); helper.remove();
+      if (!ok) throw new Error('Copy unavailable');
+    }
+
+    // Отправка формы — без перезагрузки страницы и без сервера.
+    requestForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!validateRequestForm()) return;
+      try {
+        await copyToClipboard(buildRequestText());
+        showRequestToast();
+      } catch (error) {
+        window.prompt('Не удалось скопировать автоматически. Скопируйте заявку вручную:', buildRequestText());
+      }
+    });
+
+    // Снимаем подсветку ошибок сразу при вводе.
+    ['name','format','date','contact'].forEach((name) => {
+      const field = requestForm.elements[name];
+      field.addEventListener('input', () => setInvalid(name, false));
+      field.addEventListener('change', () => setInvalid(name, false));
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
